@@ -29,6 +29,26 @@ function operate() {
  
 }
 
+const display = document.querySelector('.display')
+const buttons = document.querySelectorAll('button');
 
-let input = document.getElementById('#number')
-console.log(input)
+buttons.forEach((button) => {
+
+  button.addEventListener('click', () => {
+    let n1
+    let operator 
+    if (button.className === 'calcBtn number') {
+        n1 = parseInt(button.id)
+        console.log(n1)
+        display.textContent = `${button.id}`
+        return n1
+    } else if (button.className === 'calcBtn operator') {
+        operator = button.id
+        console.log(operator)
+        return operator
+    } ;
+    
+
+  });
+});
+
