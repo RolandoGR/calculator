@@ -73,7 +73,7 @@ body {
 
 }
 
-#zero {
+.calcBtn.number.zero {
   flex: 1 0 46%;
 }
 

@@ -29,20 +29,27 @@ function operate() {
  
 }
 
+let n1 
+let operator 
 const display = document.querySelector('.display')
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
-
   button.addEventListener('click', () => {
-    let n1
-    let operator 
-    if (button.className === 'calcBtn number') {
-        n1 = parseInt(button.id)
+    while (button.className === 'calcBtn number') {
+        console.log(typeof(n1))
+        if (typeof(n1) === 'undefined') {
+            display.textContent = `${button.id}`
+            n1 = button.id
+        } else {
+            display.textContent += `${button.id}`
+            n1 += button.id
+        }
         console.log(n1)
-        display.textContent = `${button.id}`
         return n1
-    } else if (button.className === 'calcBtn operator') {
+    } 
+    
+    if (button.className === 'calcBtn operator') {
         operator = button.id
         console.log(operator)
         return operator
