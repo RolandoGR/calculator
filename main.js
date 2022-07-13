@@ -16,7 +16,13 @@ function multiply (n1, n2) {
     return n1 * n2
 }
 function divide (n1, n2) {
-    return n1 / n2
+    if (n2 === 0) {
+        display.textContent = 'ERROR'
+        return
+    } else {
+        return n1 / n2
+    }
+    
 }
 
 function reset() {
@@ -94,11 +100,13 @@ buttons.forEach((button) => {
     }
     
     if (button.className === 'calcBtn number' || button.className === 'calcBtn number zero') {
-        if (log[log.length -1] === '+' ||
+        if ((log[log.length -1] === '+' ||
         log[log.length -1] === '-' ||
         log[log.length -1] === '*' ||
-        log[log.length -1] === '/')  {
+        log[log.length -1] === '/')  &&
+        (n1 !== 0)) {
             n2 = setNumber(n2, button)
+            return
         } else {
             n1 = setNumber(n1, button)
 
