@@ -1,4 +1,12 @@
-function add (n1, n2) {
+let n1 = 0
+let operator = '' 
+let n2 = 0
+let result = 0
+let log = []
+const display = document.querySelector('.display')
+const buttons = document.querySelectorAll('button');
+
+function add (n1,n2) {
     return n1 + n2
 }
 function subtract (n1, n2) {
@@ -11,51 +19,98 @@ function divide (n1, n2) {
     return n1 / n2
 }
 
-function operate() {
-    let n1 = parseInt(prompt ("enter first number"))
-    let operator = prompt ("enter operator")
-    let n2 = parseInt(prompt ("enter second number"))
-    if (operator === '+') {
-        return add(n1, n2)
-    } else if (operator === '-') {
-        return subtract(n1, n2)
-    } else if (operator === '*') {
-        return multiply(n1, n2)
-    } else if (operator === '/') {
-        return divide(n1, n2)
-    } else {
-        operator = prompt ("enter operator again")
-    }
- 
+function reset() {
+    n1 = 0 
+    operator = '' 
+    n2 = 0
+    result = 0
+    log = []
+    display.textContent = `${n1}`
+    return
 }
 
-let n1 
-let operator 
-const display = document.querySelector('.display')
-const buttons = document.querySelectorAll('button');
+function equal() {
+    n1 = parseInt(n1)
+    n2 = parseInt(n2)
+    console.log(n1, n2, operator, log)
+    operate(n1, n2, operator)
+    
+    display.textContent = `${result}`
+    n1 = result
+    n2 = 0
+    return
+}
+
+
+function setNumber(n, button) {
+        if (n === 0) {
+            display.textContent = `${button.id}`
+            n = button.id
+        } else {  
+            display.textContent += `${button.id}`
+            n += button.id
+        }
+
+ 
+        console.log('Number introduced: ', n)
+        return n
+    }
+
+
+function setOperator(button) {
+        display.textContent += `${button.id}`
+        operator = button.id
+        return operator
+}
+
+function operate(n1, n2, operator) {
+    if (operator === '+') {
+        result = add(n1, n2)
+    } else if (operator === '-') {
+        result = subtract(n1, n2)
+    } else if (operator === '*') {
+        result = multiply(n1, n2)
+    } else if (operator === '/') {
+        result = divide(n1, n2)
+    } else {
+        return
+    }
+    display.textContent = `${result}` 
+    return result   
+}
+
+
+
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
-    while (button.className === 'calcBtn number') {
-        console.log(typeof(n1))
-        if (typeof(n1) === 'undefined') {
-            display.textContent = `${button.id}`
-            n1 = button.id
+    if (button.id === 'c') {
+        reset()
+    }
+    
+    if (button.id === 'equal') {
+        equal()
+        return
+    }
+    
+    if (button.className === 'calcBtn number' || button.className === 'calcBtn number zero') {
+        if (log[log.length -1] === '+' ||
+        log[log.length -1] === '-' ||
+        log[log.length -1] === '*' ||
+        log[log.length -1] === '/')  {
+            n2 = setNumber(n2, button)
         } else {
-            display.textContent += `${button.id}`
-            n1 += button.id
+            n1 = setNumber(n1, button)
+
         }
-        console.log(n1)
-        return n1
     } 
     
     if (button.className === 'calcBtn operator') {
-        operator = button.id
-        console.log(operator)
-        return operator
-    } ;
+        operator = setOperator(button) 
+        }   
     
-
+    log.push(button.id)
+    console.log(log)
   });
 });
 
