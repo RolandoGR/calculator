@@ -3,6 +3,7 @@ let operator = ''
 let n2 = 0
 let result = 0
 let log = []
+
 const display = document.querySelector('.display')
 const buttons = document.querySelectorAll('button');
 
@@ -16,16 +17,16 @@ function multiply (n1, n2) {
     return n1 * n2
 }
 function divide (n1, n2) {
-    if (n2 === 0) {
-        display.textContent = 'ERROR'
-        return
-    } else {
-        return n1 / n2
-    }
-    
+        return n1 / n2    
 }
 
 function reset() {
+    display.textContent = `${result}`
+    n1 = result
+    n2 = 0
+}
+
+function resetAll() {
     n1 = 0 
     operator = '' 
     n2 = 0
@@ -40,11 +41,18 @@ function equal() {
     n2 = parseInt(n2)
     console.log(n1, n2, operator, log)
     operate(n1, n2, operator)
-    
-    display.textContent = `${result}`
-    n1 = result
-    n2 = 0
+    reset()
     return
+}
+
+function changeSign() {
+    if (n2 !== 0) {
+        result = n2 * (-1)
+    } else {
+        result = n1 * (-1)
+    }
+    reset()
+    return 
 }
 
 
@@ -77,9 +85,14 @@ function operate(n1, n2, operator) {
     } else if (operator === '*') {
         result = multiply(n1, n2)
     } else if (operator === '/') {
-        result = divide(n1, n2)
+        if (n2 === 0) {
+            result = 'BOOM!'
+            return
+        } else {        
+            result = divide(n1, n2)
+        }   
     } else {
-        return
+        result = n1
     }
     display.textContent = `${result}` 
     return result   
@@ -90,9 +103,12 @@ function operate(n1, n2, operator) {
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
+    if (button.id === 'dot') {
+        alert('Functionality not added yet :o')
+    }
     
     if (button.id === 'c') {
-        reset()
+     resetAll()
     }
     
     if (button.id === 'equal') {
@@ -100,6 +116,10 @@ buttons.forEach((button) => {
         return
     }
     
+    if (button.id === 'changeSign') {
+        changeSign(n1, n2)
+    }
+
     log.push(button.id)
     console.log(log)
 

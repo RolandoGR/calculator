@@ -12,13 +12,18 @@ input[type=number] {
 
 body {
   font-family: Roboto, sans-serif;
-  background-color: rgb(0, 0, 0); /* Pending change to triple 222 */
+  background-color: rgb(222, 222, 222);
   display: flex;
   height: 100vh;
   margin: 0;
   flex-direction: column;
 
 }
+
+button {
+  border-radius: 10px;
+}
+
 .heading {
   margin-bottom: 5%;
   font-size: 50px;
@@ -35,7 +40,7 @@ body {
   padding: 20px;
   height: 50vh;
   width: 30vh;
-  background-color: rgb(39, 43, 100);
+  background-color: rgb(57, 60, 107);
   border-radius: 5px;
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);;
 
@@ -63,7 +68,6 @@ body {
 .calcBtn {
   font-size: 20px;
   font-weight: bold;
-  border-radius: 3px;
   flex: 1 1 21%;
 }
 
@@ -77,6 +81,17 @@ body {
   flex: 1 0 46%;
 }
 
+.calcBtn.number, #dot {
+  background-color: rgb(133, 196, 99);
+}
+
+.calcBtn.operator, #equal {
+  background-color: rgb(250, 189, 77);
+}
+
+.calcBtn.symbol {
+  background-color: rgb(151, 204, 250);
+}
 
 .footer {
     display: flex;
