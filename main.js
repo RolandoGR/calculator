@@ -90,6 +90,7 @@ function operate(n1, n2, operator) {
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
+    
     if (button.id === 'c') {
         reset()
     }
@@ -99,11 +100,14 @@ buttons.forEach((button) => {
         return
     }
     
+    log.push(button.id)
+    console.log(log)
+
     if (button.className === 'calcBtn number' || button.className === 'calcBtn number zero') {
-        if ((log[log.length -1] === '+' ||
-        log[log.length -1] === '-' ||
-        log[log.length -1] === '*' ||
-        log[log.length -1] === '/')  &&
+        if ((operator === '+' ||
+        operator === '-' ||
+        operator === '*' ||
+        operator === '/')  &&
         (n1 !== 0)) {
             n2 = setNumber(n2, button)
             return
@@ -114,11 +118,17 @@ buttons.forEach((button) => {
     } 
     
     if (button.className === 'calcBtn operator') {
-        operator = setOperator(button) 
+        if ((n1 !== 0) && (n2 === 0)) {
+            operator = setOperator(button) 
+
+            } else {
+                equal()
+                operator = setOperator(button) 
+
+              }
         }   
     
-    log.push(button.id)
-    console.log(log)
+
   });
 });
 
